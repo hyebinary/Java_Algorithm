@@ -1,8 +1,6 @@
 package Chapter6;
 
 import java.io.*;
-import java.util.ArrayList;
-import java.util.List;
 
 public class Main {
     public String solution(String str) {
