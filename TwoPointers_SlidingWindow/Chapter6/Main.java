@@ -1,20 +1,22 @@
-package TwoPointers.Chapter4;
+package TwoPointers_SlidingWindow.Chapter6;
 
 import java.io.*;
 import java.util.StringTokenizer;
 
 public class Main {
-    public static int solution(int N, int M, int[] arr) {
+    public static int solution(int N, int k, int[] arr) {
         int answer = 0;
 
-        int p1 = 0, p2 = 0, sum = 0;
-        for(int i = 0; i < N; i++) {
-            sum += arr[p2++];
-            if(sum == M) answer++;
-            while(sum > M) {
-                sum -= arr[p1++];
-                if(sum == M) answer++; // 왼쪽 포인터 옮긴 후 다시 타겟넘버와 비교해주기.
+        int lt = 0, rt = 0;
+        int cnt = 0;
+
+        for(rt = 0; rt < N; rt++) {
+            if(arr[rt] == 0) cnt++; // rt는 0만나면 무조건 1로 바꿔주기.
+            while(cnt > k) {
+                if(arr[lt] == 0) cnt--;
+                lt++;
             }
+            answer = Math.max(answer, rt-lt+1);
         }
 
         return answer;
@@ -26,7 +28,7 @@ public class Main {
 
         StringTokenizer st = new StringTokenizer(br.readLine());
         int N = Integer.parseInt(st.nextToken());
-        int M = Integer.parseInt(st.nextToken());
+        int k = Integer.parseInt(st.nextToken());
 
         st = new StringTokenizer(br.readLine());
         int[] arr = new int[N];
@@ -34,7 +36,7 @@ public class Main {
             arr[i] = Integer.parseInt(st.nextToken());
         }
 
-        bw.write(String.valueOf(solution(N, M, arr)));
+        bw.write(String.valueOf(solution(N, k, arr)));
         bw.flush();
         bw.close();
     }

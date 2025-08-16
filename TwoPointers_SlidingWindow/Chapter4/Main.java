@@ -1,29 +1,32 @@
-package TwoPointers.Chapter3;
+package TwoPointers_SlidingWindow.Chapter4;
 
 import java.io.*;
 import java.util.StringTokenizer;
 
 public class Main {
-    public static int solution(int N, int k, int[] arr) {
-        int sum = 0, answer = 0;
+    public static int solution(int N, int M, int[] arr) {
+        int answer = 0;
 
-        // 초기화
-        for(int i = 0; i < k; i++) sum += arr[i];
-        answer = sum;
-
-        for(int i = k; i < N; i++) {
-            sum += (arr[i] - arr[i-k]); // Sliding window - 오른쪽으로 이동하면서 오른쪽 원소 추가, 왼쪽 원소 제거.
-            answer = Math.max(answer, sum);
+        int p1 = 0, p2 = 0, sum = 0;
+        for(int i = 0; i < N; i++) {
+            sum += arr[p2++];
+            if(sum == M) answer++;
+            while(sum > M) {
+                sum -= arr[p1++];
+                if(sum == M) answer++; // 왼쪽 포인터 옮긴 후 다시 타겟넘버와 비교해주기.
+            }
         }
+
         return answer;
     }
 
     public static void main(String[] args) throws IOException {
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
         BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(System.out));
+
         StringTokenizer st = new StringTokenizer(br.readLine());
-        int N = Integer.parseInt(st.nextToken()); // 전체 일수
-        int K = Integer.parseInt(st.nextToken()); // 연속되는 일수
+        int N = Integer.parseInt(st.nextToken());
+        int M = Integer.parseInt(st.nextToken());
 
         st = new StringTokenizer(br.readLine());
         int[] arr = new int[N];
@@ -31,7 +34,7 @@ public class Main {
             arr[i] = Integer.parseInt(st.nextToken());
         }
 
-        bw.write(String.valueOf(solution(N, K, arr)));
+        bw.write(String.valueOf(solution(N, M, arr)));
         bw.flush();
         bw.close();
     }

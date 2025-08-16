@@ -1,4 +1,4 @@
-package TwoPointers.Chapter5;
+package TwoPointers_SlidingWindow.Chapter5;
 
 import java.io.*;
 
