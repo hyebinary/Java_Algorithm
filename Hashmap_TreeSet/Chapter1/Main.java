@@ -1,4 +1,4 @@
-package Hashmap_TreeSet.Chpater1;
+package Hashmap_TreeSet.Chapter1;
 
 import java.io.*;
 import java.util.HashMap;
@@ -8,6 +8,12 @@ public class Main {
     public static char solution(int N, char[] arr) {
         char answer = ' ';
         Map<Character, Integer> map = new HashMap();
+
+//        map.containsKey('A'); // boolean 반환.
+//        map.size(); // key 갯수
+//        map.remove('A'); // key 삭제
+//        for ( ... : map.keySet()) // 탐색
+
 //        for(int i = 0; i < N; i++) {
 //            if(map.get(arr[i]) != null) map.put(arr[i], map.get(arr[i]) + 1);
 //            else map.put(arr[i], 1);
